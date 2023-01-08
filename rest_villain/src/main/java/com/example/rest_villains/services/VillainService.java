@@ -17,11 +17,8 @@ import static jakarta.transaction.Transactional.TxType.SUPPORTS;
 @Service
 @Transactional(REQUIRED)
 public class VillainService {
-    private final VillainRepository villainRepository;
-
-    public VillainService(VillainRepository villainRepository) {
-        this.villainRepository = villainRepository;
-    }
+    @Autowired
+    VillainRepository villainRepository;
 
     @Transactional(SUPPORTS)
     public List<Villain> findAllVillains() {

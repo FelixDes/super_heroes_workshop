@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -38,11 +37,10 @@ public class VillainResource {
 
     @GetMapping
     @Operation(summary = "Returns all the villains from the database")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", content = @Content(
-                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    array = @ArraySchema(schema = @Schema(implementation = Villain.class)))),
-            @ApiResponse(responseCode = "204", description = "No villains")})
+    @ApiResponse(responseCode = "200", content = @Content(
+            mediaType = MediaType.APPLICATION_JSON_VALUE,
+            array = @ArraySchema(schema = @Schema(implementation = Villain.class))))
+    @ApiResponse(responseCode = "204", description = "No villains")
     public ResponseEntity<List<Villain>> getAllVillains() {
         List<Villain> villains = service.findAllVillains();
         log.info("Total number of villains " + villains);
@@ -62,10 +60,8 @@ public class VillainResource {
 
     @GetMapping("/{id}")
     @Operation(summary = "Returns a villain for a given identifier")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Villain.class))),
-            @ApiResponse(responseCode = "204", description = "The villain is not found for a given identifier")
-    })
+    @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Villain.class)))
+    @ApiResponse(responseCode = "204", description = "The villain is not found for a given identifier")
     public ResponseEntity<Villain> getVillain(@PathVariable("id") Long id) {
         Villain villain = service.findVillainById(id);
         if (villain != null) {
