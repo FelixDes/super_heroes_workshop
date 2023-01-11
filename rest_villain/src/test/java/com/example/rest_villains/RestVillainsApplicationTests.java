@@ -40,6 +40,11 @@ class RestVillainsApplicationTests {
     private MockMvc mockMvc;
 
     @Test
+    void shouldPingOpenAPI() throws Exception {
+        this.mockMvc.perform(get("/v3/api-docs")).andExpect(status().isOk());
+    }
+
+    @Test
     void shouldNotGetUnknownVillain() throws Exception {
         Long randomId = new Random().nextLong();
         this.mockMvc.perform(get("/api/villains/{id}", String.valueOf(randomId)))
@@ -134,10 +139,5 @@ class RestVillainsApplicationTests {
     void shouldRemoveAnItem() throws Exception {
         this.mockMvc.perform(delete("/api/villains/{id}", String.valueOf(villainId)))
                 .andExpect(status().isNoContent());
-    }
-
-    @Test
-    void shouldPingOpenAPI() throws Exception {
-        this.mockMvc.perform(get("/v3/api-docs")).andExpect(status().isOk());
     }
 }

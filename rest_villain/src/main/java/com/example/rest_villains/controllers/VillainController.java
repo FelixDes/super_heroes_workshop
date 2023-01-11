@@ -28,17 +28,19 @@ import java.util.List;
 @RequestMapping("api/villains")
 @OpenAPIDefinition(info = @Info(title = "Villain API",
         description = "This API allows CRUD operations on a villain"))
-public class VillainResource {
+public class VillainController {
     private final VillainService service;
 
-    public VillainResource(VillainService service) {
+    public VillainController(VillainService service) {
         this.service = service;
     }
+
+    private static final String JSON = MediaType.APPLICATION_JSON_VALUE;
 
     @GetMapping
     @Operation(summary = "Returns all the villains from the database")
     @ApiResponse(responseCode = "200", content = @Content(
-            mediaType = MediaType.APPLICATION_JSON_VALUE,
+            mediaType = JSON,
             array = @ArraySchema(schema = @Schema(implementation = Villain.class))))
     @ApiResponse(responseCode = "204", description = "No villains")
     public ResponseEntity<List<Villain>> getAllVillains() {
@@ -50,7 +52,7 @@ public class VillainResource {
     @GetMapping("/random")
     @Operation(summary = "Returns a random villain")
     @ApiResponse(responseCode = "200", content = @Content(
-            mediaType = MediaType.APPLICATION_JSON_VALUE,
+            mediaType = JSON,
             schema = @Schema(implementation = Villain.class)))
     public ResponseEntity<Villain> getRandomVillain() {
         Villain villain = service.findRandomVillain();
@@ -60,7 +62,7 @@ public class VillainResource {
 
     @GetMapping("/{id}")
     @Operation(summary = "Returns a villain for a given identifier")
-    @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Villain.class)))
+    @ApiResponse(responseCode = "200", content = @Content(mediaType = JSON, schema = @Schema(implementation = Villain.class)))
     @ApiResponse(responseCode = "204", description = "The villain is not found for a given identifier")
     public ResponseEntity<Villain> getVillain(@PathVariable("id") Long id) {
         Villain villain = service.findVillainById(id);
@@ -75,7 +77,7 @@ public class VillainResource {
 
     @PostMapping
     @Operation(summary = "Creates a valid villain")
-    @ApiResponse(responseCode = "201", description = "The URI of the created villain", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = URI.class)))
+    @ApiResponse(responseCode = "201", description = "The URI of the created villain", content = @Content(mediaType = JSON, schema = @Schema(implementation = URI.class)))
     public ResponseEntity<URI> createVillain(@RequestBody @Valid Villain villain, HttpServletRequest request) {
         var baseUrl = ServletUriComponentsBuilder.fromRequestUri(request);
 
@@ -87,7 +89,7 @@ public class VillainResource {
 
     @PutMapping
     @Operation(summary = "Updates an exiting  villain")
-    @ApiResponse(responseCode = "200", description = "The updated villain", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Villain.class)))
+    @ApiResponse(responseCode = "200", description = "The updated villain", content = @Content(mediaType = JSON, schema = @Schema(implementation = Villain.class)))
     public ResponseEntity<Villain> updateVillain(@RequestBody @Valid Villain villain) {
         villain = service.updateVillain(villain);
         log.info("Villain updated with new valued " + villain);
@@ -98,7 +100,7 @@ public class VillainResource {
     @Operation(summary = "Deletes an exiting villain")
     @ApiResponse(responseCode = "204")
     public ResponseEntity<Villain> deleteVillain(@PathVariable("id") Long id) {
-        service.deleteVillain(id);
+        service.deleteVillainById(id);
         log.info("Villain deleted with " + id);
         return ResponseEntity.noContent().build();
     }

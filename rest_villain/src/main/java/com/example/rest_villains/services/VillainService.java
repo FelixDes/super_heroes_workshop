@@ -4,7 +4,6 @@ import com.example.rest_villains.data.Villain;
 import com.example.rest_villains.data.VillainRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -17,8 +16,11 @@ import static jakarta.transaction.Transactional.TxType.SUPPORTS;
 @Service
 @Transactional(REQUIRED)
 public class VillainService {
-    @Autowired
-    VillainRepository villainRepository;
+    private final VillainRepository villainRepository;
+
+    public VillainService(VillainRepository villainRepository) {
+        this.villainRepository = villainRepository;
+    }
 
     @Transactional(SUPPORTS)
     public List<Villain> findAllVillains() {
@@ -43,8 +45,7 @@ public class VillainService {
     }
 
     public Villain saveVillain(@Valid Villain villain) {
-        villainRepository.saveAndFlush(villain);
-        return villain;
+        return villainRepository.saveAndFlush(villain);
     }
 
     public Villain updateVillain(@Valid Villain villain) {
@@ -63,7 +64,7 @@ public class VillainService {
         }
     }
 
-    public void deleteVillain(Long id) {
+    public void deleteVillainById(Long id) {
         villainRepository.deleteById(id);
     }
 }
