@@ -1,8 +1,6 @@
 package com.example.rest_villains.data;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +15,9 @@ import java.util.Objects;
 public class Villain {
     @jakarta.persistence.Id
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="hibernate_sequence",sequenceName="hibernate_sequence", allocationSize=1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="hibernate_sequence")
+
     private Long id;
 
     @NotNull
@@ -31,7 +31,7 @@ public class Villain {
 
     private String picture;
 
-    //@Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "text")
     private String powers;
 
     @Override

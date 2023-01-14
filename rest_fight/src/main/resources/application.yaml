@@ -1,0 +1,25 @@
+server:
+  port: 8084
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fights_db
+    username: felix
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc.lob.non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+
+#spring.datasource.url=jdbc:postgresql://localhost:5432/fights_db
+#spring.datasource.username=felix
+#
+#spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+#
+#spring.jpa.generate-ddl=true
+#spring.jpa.hibernate.ddl-auto=update
