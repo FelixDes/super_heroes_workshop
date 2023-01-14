@@ -1,10 +1,9 @@
-package com.example.rest_battle.services;
+package com.example.rest_fight.services;
 
-import com.example.rest_battle.data.Fight;
-import com.example.rest_battle.data.FightRepository;
-import com.example.rest_battle.data.Fighters;
+import com.example.rest_fight.data.Fight;
+import com.example.rest_fight.data.FightRepository;
+import com.example.rest_fight.data.Fighters;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

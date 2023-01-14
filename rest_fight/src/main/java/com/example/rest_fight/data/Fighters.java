@@ -1,9 +1,8 @@
-package com.example.rest_battle.data;
+package com.example.rest_fight.data;
 
 
-import com.example.rest_battle.client.Hero;
-import com.example.rest_battle.client.Villain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.rest_fight.client.Hero;
+import com.example.rest_fight.client.Villain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;

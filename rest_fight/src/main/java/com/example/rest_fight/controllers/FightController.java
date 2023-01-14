@@ -1,15 +1,12 @@
-package com.example.rest_battle.controllers;
+package com.example.rest_fight.controllers;
 
-import com.example.rest_battle.data.Fight;
-import com.example.rest_battle.data.Fighters;
-import com.example.rest_battle.services.FightService;
+import com.example.rest_fight.data.Fight;
+import com.example.rest_fight.data.Fighters;
+import com.example.rest_fight.services.FightService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 

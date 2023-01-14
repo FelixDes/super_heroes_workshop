@@ -1,4 +1,4 @@
-package com.example.rest_battle.client;
+package com.example.rest_fight.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;

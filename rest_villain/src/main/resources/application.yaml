@@ -1,9 +1,9 @@
 server:
-  port: 8084
+  port: 8080
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/fights_db
+    url: jdbc:postgresql://localhost:5432/villains_db
     username: felix
 
   jpa:

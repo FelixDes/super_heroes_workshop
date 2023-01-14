@@ -1,4 +1,4 @@
-package com.example.rest_battle.data;
+package com.example.rest_fight.data;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

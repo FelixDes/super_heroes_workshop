@@ -1,4 +1,4 @@
-package com.example.rest_battle.data;
+package com.example.rest_fight.data;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
