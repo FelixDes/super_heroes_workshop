@@ -45,7 +45,7 @@ public class VillainController {
     @ApiResponse(responseCode = "204", description = "No villains")
     public ResponseEntity<List<Villain>> getAllVillains() {
         List<Villain> villains = service.findAllVillains();
-        log.info("Total number of villains " + villains);
+        log.debug("Total number of villains " + villains);
         return ResponseEntity.ok(villains);
     }
 
@@ -56,7 +56,7 @@ public class VillainController {
             schema = @Schema(implementation = Villain.class)))
     public ResponseEntity<Villain> getRandomVillain() {
         Villain villain = service.findRandomVillain();
-        log.info("Found random villain " + villain);
+        log.debug("Found random villain " + villain);
         return ResponseEntity.ok(villain);
     }
 
@@ -67,10 +67,10 @@ public class VillainController {
     public ResponseEntity<Villain> getVillain(@PathVariable("id") Long id) {
         Villain villain = service.findVillainById(id);
         if (villain != null) {
-            log.info("Found villain " + villain);
+            log.debug("Found villain " + villain);
             return ResponseEntity.ok(villain);
         } else {
-            log.info("No villain found with id " + id);
+            log.debug("No villain found with id " + id);
             return ResponseEntity.noContent().build();
         }
     }
@@ -83,7 +83,7 @@ public class VillainController {
 
         villain = service.saveVillain(villain);
         UriBuilder builder = baseUrl.pathSegment(Long.toString(villain.getId()));
-        log.info("New villain created with URI " + builder.build());
+        log.debug("New villain created with URI " + builder.build());
         return ResponseEntity.created(builder.build()).build();
     }
 
@@ -92,7 +92,7 @@ public class VillainController {
     @ApiResponse(responseCode = "200", description = "The updated villain", content = @Content(mediaType = JSON, schema = @Schema(implementation = Villain.class)))
     public ResponseEntity<Villain> updateVillain(@RequestBody @Valid Villain villain) {
         villain = service.updateVillain(villain);
-        log.info("Villain updated with new valued " + villain);
+        log.debug("Villain updated with new valued " + villain);
         return ResponseEntity.ok(villain);
     }
 
@@ -101,7 +101,7 @@ public class VillainController {
     @ApiResponse(responseCode = "204")
     public ResponseEntity<Villain> deleteVillain(@PathVariable("id") Long id) {
         service.deleteVillainById(id);
-        log.info("Villain deleted with " + id);
+        log.debug("Villain deleted with " + id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -62,7 +62,7 @@ public class HeroController {
             schema = @Schema(implementation = Hero.class)))
     public Mono<Hero> getRandomHero() {
         return service.findRandomHero()
-                .doOnNext(hero -> log.info("Found random hero " + hero));
+                .doOnNext(hero -> log.debug("Found random hero " + hero));
     }
 
     // TODO
@@ -73,10 +73,10 @@ public class HeroController {
     public Mono<ResponseEntity<Hero>> getHero(@PathVariable("id") Long id) {
         return service.findHeroById(id).flatMap(hero -> {
             if (Objects.nonNull(hero)) {
-                log.info("Found Hero " + hero);
+                log.debug("Found Hero " + hero);
                 return Mono.just(ResponseEntity.ok(hero));
             } else {
-                log.info("No Hero found with id " + id);
+                log.debug("No Hero found with id " + id);
                 return Mono.just(ResponseEntity.noContent().build());
             }
         });
@@ -98,7 +98,7 @@ public class HeroController {
     @ApiResponse(responseCode = "200", description = "The updated hero", content = @Content(mediaType = JSON, schema = @Schema(implementation = Hero.class)))
     public Mono<ResponseEntity<Hero>> updateHero(@RequestBody @Valid Hero hero) {
         return service.updateHero(hero).map(h -> {
-            log.info("Hero updated with new valued " + h);
+            log.debug("Hero updated with new valued " + h);
             return ResponseEntity.ok(h);
         });
     }
@@ -108,7 +108,7 @@ public class HeroController {
     @ApiResponse(responseCode = "204")
     public Mono<ResponseEntity<Hero>> deleteHero(@PathVariable("id") Long id) {
         return service.deleteHeroById(id)
-                .doOnNext(x -> log.info("Hero deleted with " + id))
+                .doOnNext(x -> log.debug("Hero deleted with " + id))
                 .map(v -> ResponseEntity.noContent().build());
     }
 }
