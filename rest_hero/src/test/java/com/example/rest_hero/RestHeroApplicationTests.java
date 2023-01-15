@@ -1,44 +1,31 @@
 package com.example.rest_hero;
 
-import com.example.rest_hero.controllers.HeroController;
-import com.example.rest_hero.data.Hero;
 import com.example.rest_hero.services.HeroService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Random;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.http.HttpHeaders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Slf4j
-//@SpringBootTest
-//@AutoConfigureMockMvc
-//@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+//@RunWith(SpringRunner.class)
+//@WebFluxTest(HeroController.class)
 //@DirtiesContext
-@RunWith(SpringRunner.class)
-@WebFluxTest(HeroController.class)
-@DirtiesContext
-class RestHeroApplicationTests {
+//@ActiveProfiles("test")
+public class RestHeroApplicationTests {
     private static final String JSON = MediaType.APPLICATION_JSON_VALUE;
     private static final String DEFAULT_NAME = "DEFAULT_NAME";
     private static final String UPDATED_NAME = "DEFAULT_NAME (updated)";
@@ -52,8 +39,8 @@ class RestHeroApplicationTests {
     private static final int UPDATED_LEVEL = 43;
     private static String heroId;
 
-//    @Autowired
-//    private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
     @Autowired
     WebTestClient webTestClient;
@@ -61,26 +48,24 @@ class RestHeroApplicationTests {
     @MockBean
     private HeroService service;
 
-//    @Test
-//    void shouldPingOpenAPI(){
-//        webTestClient.get().uri("/v3/api-docs").exchange().expectStatus().isOk();
-////        this.mockMvc.perform(get("/v3/api-docs")).andExpect(status().isOk());
-//    }
+    @Test
+    void shouldPingOpenAPI() throws Exception {
+        this.mockMvc.perform(get("/v3/api-docs")).andExpect(status().isOk());
+    }
 
 //    @Test
 //    void shouldNotGetUnknownHero() throws Exception {
 //        Long randomId = new Random().nextLong();
-//        webTestClient.get().uri("/api/heroes/{id}", String.valueOf(randomId)).exchange().expectStatus().isNoContent();
-////        this.mockMvc.perform(get("/api/heroes/{id}", String.valueOf(randomId)))
+//        var a = this.mockMvc.perform(get("/api/heroes/{id}", String.valueOf(randomId))).andReturn().getResponse().getContentAsString();
 ////                .andExpect(status().isNoContent());
-//
+//        System.out.printf(a);
 //    }
-//
-//    @Test
-//    void shouldGetRandomHero() throws Exception {
-//        this.mockMvc.perform(get("/api/heroes/random"))
-//                .andExpect(status().isOk());
-//    }
+
+    @Test
+    void shouldGetRandomHero() throws Exception {
+        this.mockMvc.perform(get("/api/heroes/random"))
+                .andExpect(status().isOk());
+    }
 //
 //    @Test
 //    void shouldNotAddInvalidItem() throws Exception {
@@ -98,14 +83,12 @@ class RestHeroApplicationTests {
 //                .andExpect(status().isBadRequest());
 //    }
 //
-//    @Test
-//    void shouldGetInitialItems() throws Exception {
-//        this.mockMvc.perform(get("/api/heroes")).andDo((h) -> {
-//                    log.info(h.toString());
-//                })
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentType(JSON));
-//    }
+    @Test
+    void shouldGetInitialItems() throws Exception {
+        this.mockMvc.perform(get("/api/heroes")).andDo((h) -> log.info(h.toString()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(JSON));
+    }
 //
 //    @Test
 //    @Order(1)

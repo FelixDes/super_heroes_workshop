@@ -37,8 +37,8 @@ public class HeroService {
         return heroRepository.count()
                 .map(count -> {
                     var c = count.intValue();
-                    if (c >= 0) {
-                        return random.nextInt();
+                    if (c > 0) {
+                        return random.nextInt(0, c);
                     } else {
                         return 0;
                     }

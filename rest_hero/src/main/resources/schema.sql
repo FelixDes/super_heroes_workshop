@@ -8,5 +8,5 @@ create table hero
     name       varchar(50) not null,
     other_name varchar(255),
     picture    varchar(255),
-    powers     varchar(255)
+    powers     text
 );

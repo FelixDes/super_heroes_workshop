@@ -46,10 +46,8 @@ public class HeroController {
             mediaType = JSON,
             array = @ArraySchema(schema = @Schema(implementation = Hero.class))))
     @ApiResponse(responseCode = "204", description = "No heroes")
-    public Mono<ResponseEntity<List<Hero>>> getAllHeroes() {
-        return service.findAllHeroes().collectList().map(heroList ->
-                ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(heroList)
-        );
+    public Mono<List<Hero>> getAllHeroes() {
+        return service.findAllHeroes().collectList();
     }
 
     @GetMapping("/random")
