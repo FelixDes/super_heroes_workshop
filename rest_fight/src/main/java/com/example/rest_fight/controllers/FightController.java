@@ -13,6 +13,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("api/fights")
+@CrossOrigin
 public class FightController {
     private final FightService service;
 

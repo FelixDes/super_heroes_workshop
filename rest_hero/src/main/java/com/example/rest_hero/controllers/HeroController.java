@@ -15,18 +15,14 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriBuilder;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
-
-import static org.springframework.web.servlet.function.RouterFunctions.route;
 
 @Slf4j
 @Tag(name = "Heroes")
@@ -34,6 +30,7 @@ import static org.springframework.web.servlet.function.RouterFunctions.route;
 @RequestMapping("api/heroes")
 @OpenAPIDefinition(info = @Info(title = "Hero API",
         description = "This API allows CRUD operations on a hero"))
+@CrossOrigin
 public class HeroController {
     private final HeroService service;
 

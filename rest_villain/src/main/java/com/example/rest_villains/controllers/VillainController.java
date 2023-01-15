@@ -28,6 +28,7 @@ import java.util.List;
 @RequestMapping("api/villains")
 @OpenAPIDefinition(info = @Info(title = "Villain API",
         description = "This API allows CRUD operations on a villain"))
+@CrossOrigin
 public class VillainController {
     private final VillainService service;
 
