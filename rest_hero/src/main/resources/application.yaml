@@ -1,0 +1,7 @@
+server:
+  port: 8083
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/heroes_db
+    username: felix

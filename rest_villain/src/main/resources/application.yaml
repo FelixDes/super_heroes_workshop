@@ -1,7 +1,6 @@
 server:
-  port: 8080
+  port: 8084
 
-spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/villains_db
     username: felix
