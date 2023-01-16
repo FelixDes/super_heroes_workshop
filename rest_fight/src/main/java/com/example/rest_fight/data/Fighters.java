@@ -13,34 +13,8 @@ import lombok.Data;
 public class Fighters {
     @JsonProperty("hero")
     @NotNull
-    public Hero hero;
+    private Hero hero;
     @JsonProperty("villain")
     @NotNull
-    public Villain villain;
-
-//    @Data
-//    @Schema(description = "The villain fighting against the hero")
-//    public static class Villain {
-//        @NotNull
-//        public String name;
-//        @NotNull
-//        public int level;
-//        @NotNull
-//        public String picture;
-//        @JsonIgnore
-//        public String powers;
-//    }
-//
-//    @Data
-//    @Schema(description = "The hero fighting against the villain")
-//    public static class Hero {
-//        @NotNull
-//        public String name;
-//        @NotNull
-//        public int level;
-//        @NotNull
-//        public String picture;
-//        @JsonIgnore
-//        public String powers;
-//    }
+    private Villain villain;
 }

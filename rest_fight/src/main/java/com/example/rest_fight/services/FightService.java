@@ -1,8 +1,15 @@
 package com.example.rest_fight.services;
 
+import com.example.rest_fight.client.Hero;
+import com.example.rest_fight.proxies.HeroProxy;
+import com.example.rest_fight.client.Villain;
+import com.example.rest_fight.proxies.Proxyable;
+import com.example.rest_fight.proxies.VillainProxy;
 import com.example.rest_fight.data.Fight;
 import com.example.rest_fight.data.FightRepository;
 import com.example.rest_fight.data.Fighters;
+//import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,14 +21,12 @@ import java.util.Random;
 @Slf4j
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class FightService {
-    private final Random random = new Random();
-
     private final FightRepository repo;
-
-    public FightService(FightRepository repo) {
-        this.repo = repo;
-    }
+    private final Proxyable<Hero> heroProxy;
+    private final Proxyable<Villain> villainProxy;
+    private final Random random = new Random();
 
     public List<Fight> findAllFights() {
         return repo.findAll();
@@ -32,10 +37,28 @@ public class FightService {
         return optFight.orElse(null);
     }
 
+    @Transactional
     public Fighters findRandomFighters() {
-        // Will be implemented later
-        return null;
+//        return null;
+        Hero hero = findRandomHero();
+        Villain villain = findRandomVillain();
+        Fighters fighters = new Fighters();
+        fighters.setHero(hero);
+        fighters.setVillain(villain);
+        return fighters;
     }
+
+
+    Villain findRandomVillain() {
+        return villainProxy.getRandom();
+    }
+
+
+    Hero findRandomHero() {
+        return heroProxy.getRandom();
+    }
+
+
 
     @Transactional
     public Fight persistFight(Fighters fighters) {

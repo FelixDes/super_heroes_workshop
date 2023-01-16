@@ -14,3 +14,12 @@ spring:
         jdbc.lob.non_contextual_creation: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
+
+hero_proxy_random:
+  url: localhost:8083
+  name: heroProxy
+  path: /api/heroes/random
+villain_proxy_random:
+  url: localhost:8084
+  name: villainProxy
+  path: /api/villains/random

@@ -9,11 +9,11 @@ import lombok.Data;
 @Schema(description = "The villain fighting against the hero")
 public class Villain {
     @NotNull
-    public String name;
+    private String name;
     @NotNull
-    public int level;
+    private int level;
     @NotNull
-    public String picture;
+    private String picture;
     @JsonIgnore
-    public String powers;
+    private String powers;
 }
