@@ -1,14 +1,11 @@
 package com.example.rest_fight.services;
 
 import com.example.rest_fight.client.Hero;
-import com.example.rest_fight.proxies.HeroProxy;
 import com.example.rest_fight.client.Villain;
-import com.example.rest_fight.proxies.Proxyable;
-import com.example.rest_fight.proxies.VillainProxy;
 import com.example.rest_fight.data.Fight;
 import com.example.rest_fight.data.FightRepository;
 import com.example.rest_fight.data.Fighters;
-//import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.example.rest_fight.proxies.Proxyable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -48,17 +45,33 @@ public class FightService {
         return fighters;
     }
 
-
     Villain findRandomVillain() {
         return villainProxy.getRandom();
     }
 
-
+//    @HystrixCommand(fallbackMethod = "fallbackRandomHero")
     Hero findRandomHero() {
         return heroProxy.getRandom();
     }
 
 
+//    public Villain fallbackRandomVillain() {
+//        Villain villain = new Villain();
+//        villain.setName("Fallback villain");
+//        villain.setPicture("https://dummyimage.com/280x380/b22222/ffffff&text=Fallback+Villain");
+//        villain.setPowers("Fallback villain powers");
+//        villain.setLevel(42);
+//        return villain;
+//    }
+
+//    public Hero fallbackRandomHero() {
+//        Hero hero = new Hero();
+//        hero.setName("Fallback hero");
+//        hero.setPicture("https://dummyimage.com/280x380/1e8fff/ffffff&text=Fallback+Hero");
+//        hero.setPowers("Fallback hero powers");
+//        hero.setLevel(1);
+//        return hero;
+//    }
 
     @Transactional
     public Fight persistFight(Fighters fighters) {

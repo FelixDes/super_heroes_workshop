@@ -15,11 +15,15 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
 
+
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
 hero_proxy_random:
   url: localhost:8083
-  name: heroProxy
   path: /api/heroes/random
 villain_proxy_random:
   url: localhost:8084
-  name: villainProxy
   path: /api/villains/random

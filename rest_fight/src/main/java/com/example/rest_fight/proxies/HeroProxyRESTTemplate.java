@@ -21,13 +21,4 @@ public class HeroProxyRESTTemplate implements Proxyable<Hero> {
         ResponseEntity<Hero> responseEntity = new RestTemplate().getForEntity(url, Hero.class);
         return responseEntity.getBody();
     }
-
-    public Hero fallbackRandomHero() {
-        Hero hero = new Hero();
-        hero.setName("Fallback hero");
-        hero.setPicture("https://dummyimage.com/280x380/1e8fff/ffffff&text=Fallback+Hero");
-        hero.setPowers("Fallback hero powers");
-        hero.setLevel(1);
-        return hero;
-    }
 }

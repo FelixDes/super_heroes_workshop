@@ -22,14 +22,4 @@ public class VillainProxyRESTTemplate implements Proxyable<Villain> {
         ResponseEntity<Villain> responseEntity = new RestTemplate().getForEntity(url, Villain.class);
         return responseEntity.getBody();
     }
-
-
-    public Villain fallbackRandomVillain() {
-        Villain villain = new Villain();
-        villain.setName("Fallback villain");
-        villain.setPicture("https://dummyimage.com/280x380/b22222/ffffff&text=Fallback+Villain");
-        villain.setPowers("Fallback villain powers");
-        villain.setLevel(42);
-        return villain;
-    }
 }
