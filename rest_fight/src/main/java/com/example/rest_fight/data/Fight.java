@@ -13,7 +13,7 @@ import java.time.Instant;
 @Data
 @Entity
 public class Fight {
-    public static enum Teams {
+    public enum Teams {
         HEROES("heroes"),
         VILLAINS("villains");
         private String val;
