@@ -8,12 +8,16 @@ import com.example.rest_fight.data.Fighters;
 import com.example.rest_fight.proxies.Proxyable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.concurrent.ListenableFuture;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
@@ -24,6 +28,7 @@ public class FightService {
     private final Proxyable<Hero> heroProxy;
     private final Proxyable<Villain> villainProxy;
     private final Random random = new Random();
+    private final KafkaTemplate<String, Fight> kafkaTemplate;
 
     public List<Fight> findAllFights() {
         return repo.findAll();
@@ -70,6 +75,8 @@ public class FightService {
 
         fight.setFightDate(Instant.now());
         repo.saveAndFlush(fight);
+
+        kafkaTemplate.sendDefault(fight).whenComplete((res, e) -> log.info(res.toString()));
 
         return fight;
     }
