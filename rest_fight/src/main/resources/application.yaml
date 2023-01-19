@@ -21,6 +21,13 @@ spring:
       circuitbreaker:
         enabled: true
 
+
+  kafka:
+    bootstrap-servers:
+      localhost:9092
+    template:
+      default-topic: fights
+
 hero_proxy_random:
   url: localhost:8083
   path: /api/heroes/random

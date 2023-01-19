@@ -1,9 +1,7 @@
 package com.example.rest_fight.proxies;
 
 import com.example.rest_fight.client.Villain;
-import org.mockito.Mock;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
