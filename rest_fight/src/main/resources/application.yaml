@@ -26,7 +26,7 @@ spring:
     bootstrap-servers:
       localhost:9092
     template:
-      default-topic: topics.fights
+      default-topic: fights
 
 hero_proxy_random:
   url: localhost:8083
