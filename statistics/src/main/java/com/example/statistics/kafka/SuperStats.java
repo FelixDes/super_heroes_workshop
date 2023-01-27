@@ -17,26 +17,28 @@ public class SuperStats {
 
     @KafkaListener(topics = "fights", containerFactory = "kafkaListenerContainerFactoryFightToDouble")
     @SendTo("team-stats")
-    public Double computeTeamStats(Fight results) {
+    public Double computeTeamStats(Fight result) {
         log.info("Fight received. Computed the team statistics");
-        return stats.add(results);
+        return stats.add(result);
     }
 
-//    @KafkaListener(topics = "fights")
-//    @SendTo("winner-stats")
-//    public Iterable<Score> computeTopWinners(Fight results) {
+    @KafkaListener(topics = "fights", containerFactory = "")
+    @SendTo("winner-stats")
+    public Iterable<Score> computeTopWinners(Fight result) {
+        return topWinners.onNewScore(getScoreForFight(result));
 //        return results
 //                .group().by(fight -> fight.winnerName)
 //                .onItem().transformToMultiAndMerge(group ->
-//                        group.onItem().scan(Score::new, this::incrementScore)
+//                        group.onItem().scan(Score::new, this::getScoreForFight)
 //                )
-//                .onItem().transform(topWinners::onNewScore)
+//                .map(topWinners::onNewScore)
 //                .invoke(() -> log.info("Fight received. Computed the top winners"));
-//    }
+    }
 
-    private Score incrementScore(Score score, Fight fight) {
-        score.name = fight.getWinnerName();
-        score.score = score.score + 1;
+    private Score getScoreForFight(Fight fight) {
+        var score = new Score();
+        score.setName(fight.getWinnerName());
+        score.setScore(score.getScore() + 1);
         return score;
     }
 }

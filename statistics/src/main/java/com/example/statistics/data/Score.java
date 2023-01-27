@@ -1,8 +1,11 @@
 package com.example.statistics.data;
 
+import lombok.Data;
+
+@Data
 public class Score {
-    public String name;
-    public int score;
+    private String name;
+    private int score;
 
     public Score() {
         this.score = 0;

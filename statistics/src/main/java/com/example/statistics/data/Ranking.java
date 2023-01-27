@@ -8,7 +8,7 @@ public class Ranking {
 
     private final int max;
 
-    private final Comparator<Score> comparator = Comparator.comparingInt(s -> -1 * s.score);
+    private final Comparator<Score> comparator = Comparator.comparingInt(s -> -1 * s.getScore());
 
     private final LinkedList<Score> top = new LinkedList<>();
 
@@ -18,7 +18,7 @@ public class Ranking {
 
     public Iterable<Score> onNewScore(Score score) {
         // Remove score if already present,
-        top.removeIf(s -> s.name.equalsIgnoreCase(score.name));
+        top.removeIf(s -> s.getName().equalsIgnoreCase(score.getName()));
         // Add the score
         top.add(score);
         // Sort

@@ -1,4 +1,4 @@
-package com.example.statistics.kafka.config;
+package com.example.statistics.kafka;
 
 import com.example.statistics.data.Fight;
 import com.example.statistics.serialization.FightDeserializer;
