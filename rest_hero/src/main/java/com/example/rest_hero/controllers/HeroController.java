@@ -56,8 +56,7 @@ public class HeroController {
             mediaType = JSON,
             schema = @Schema(implementation = Hero.class)))
     public Mono<Hero> getRandomHero() {
-        return service.findRandomHero()
-                .doOnNext(hero -> log.debug("Found random hero " + hero));
+        return service.findRandomHero().doOnNext(hero -> log.debug("Found random hero " + hero));
     }
 
     // TODO
