@@ -65,5 +65,6 @@
         <module>rest_fight</module>
         <module>rest_villain</module>
         <module>rest_hero</module>
+        <module>statistics</module>
     </modules>
 </project>
