@@ -9,15 +9,12 @@ import com.example.rest_fight.proxies.Proxyable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.concurrent.ListenableFuture;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service

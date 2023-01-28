@@ -15,19 +15,21 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Slf4j
 @Component
 public class TeamStatsWebSocketHandler extends AbstractWebSocketHandler {
+
+
     private final List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
         sessions.remove(session);
     }
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+    public void afterConnectionEstablished(WebSocketSession session) {
         sessions.add(session);
     }
 
-    @KafkaListener(topics = "team-stats", containerFactory = "kafkaListenerContainerFactoryDouble")
+    @KafkaListener(topics = "team_stats", containerFactory = "kafkaListenerContainerFactoryDouble")
     public void subscribe(double ratio) throws IOException {
         this.writeForAll(ratio);
     }

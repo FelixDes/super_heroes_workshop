@@ -1,10 +1,8 @@
 package com.example.statistics.data.serialization;
 
-import com.example.statistics.data.Fight;
 import com.example.statistics.data.ScoreListDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.errors.SerializationException;
-import org.apache.kafka.common.header.Headers;
 import org.apache.kafka.common.serialization.Deserializer;
 
 import java.io.IOException;

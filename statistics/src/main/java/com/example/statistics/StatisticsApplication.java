@@ -1,9 +1,11 @@
 package com.example.statistics;
 
+import com.example.statistics.kafka.services.SuperStats;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.kafka.annotation.EnableKafka;
-import org.springframework.kafka.annotation.EnableKafkaStreams;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 
 @SpringBootApplication

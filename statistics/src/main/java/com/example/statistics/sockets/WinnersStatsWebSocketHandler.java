@@ -1,11 +1,9 @@
 package com.example.statistics.sockets;
 
-import com.example.statistics.data.Score;
 import com.example.statistics.data.ScoreListDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -25,17 +23,17 @@ public class WinnersStatsWebSocketHandler extends AbstractWebSocketHandler {
     private final List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
         sessions.remove(session);
     }
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+    public void afterConnectionEstablished(WebSocketSession session) {
         sessions.add(session);
     }
 
     @KafkaListener(
-            topics = "winner-stats",
+            topics = "winner_stats",
             containerFactory = "kafkaListenerContainerFactoryScoreDTO",
             groupId = "winner_stats_group")
     public void subscribe(ScoreListDTO list) throws IOException {

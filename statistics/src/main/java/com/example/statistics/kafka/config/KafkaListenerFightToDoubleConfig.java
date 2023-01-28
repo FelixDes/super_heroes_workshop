@@ -22,6 +22,8 @@ public class KafkaListenerFightToDoubleConfig {
     private String bootstrapServers;
     @Value("${spring.kafka.consumer.auto-offset-reset}")
     private String offset;
+    @Value("${groups.fight_team_stats_group}")
+    private String consumerFightTeamStatsGroup;
     @Bean
     public ConsumerFactory<String, Fight> kafkaConsumerFactoryFightTeamStats() {
         Map<String, Object> props = new HashMap<>();
@@ -29,7 +31,7 @@ public class KafkaListenerFightToDoubleConfig {
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, FightDeserializer.class);
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, offset);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "fight_team_stats_group");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, consumerFightTeamStatsGroup);
 
         return new DefaultKafkaConsumerFactory<>(props);
     }

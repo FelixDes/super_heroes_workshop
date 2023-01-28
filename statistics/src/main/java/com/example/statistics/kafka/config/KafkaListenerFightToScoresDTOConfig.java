@@ -9,7 +9,6 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -24,6 +23,8 @@ public class KafkaListenerFightToScoresDTOConfig {
     private String bootstrapServers;
     @Value("${spring.kafka.consumer.auto-offset-reset}")
     private String offset;
+    @Value("${groups.fight_winner_stats_group}")
+    private String consumerFightWinnerStatsGroup;
 
     @Bean
     public ConsumerFactory<String, Fight> kafkaConsumerFactoryFightWinnerStats() {
@@ -32,7 +33,7 @@ public class KafkaListenerFightToScoresDTOConfig {
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, FightDeserializer.class);
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, offset);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "fight_winner_stats_group");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, consumerFightWinnerStatsGroup);
 
         return new DefaultKafkaConsumerFactory<>(props);
     }

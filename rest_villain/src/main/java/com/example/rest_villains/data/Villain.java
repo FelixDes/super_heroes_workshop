@@ -1,12 +1,11 @@
 package com.example.rest_villains.data;
 
 import jakarta.persistence.*;
-
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.springframework.data.annotation.Id;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 

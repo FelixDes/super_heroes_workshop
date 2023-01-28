@@ -6,3 +6,14 @@ spring:
     bootstrap-servers: localhost:9092
     consumer:
       auto-offset-reset: earliest
+
+topics:
+  winner_stats: winner_stats
+  team_stats: team_stats
+  fights: fights
+
+groups:
+  fight_winner_stats_group: fight_winner_stats_group
+  fight_team_stats_group: fight_team_stats_group
+  winner_stats_group: winner_stats_group
+  team_stats_group: team_stats_group
