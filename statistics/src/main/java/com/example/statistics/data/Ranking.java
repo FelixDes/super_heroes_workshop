@@ -3,6 +3,7 @@ package com.example.statistics.data;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Ranking {
 
@@ -16,7 +17,7 @@ public class Ranking {
         max = size;
     }
 
-    public Iterable<Score> onNewScore(Score score) {
+    public List<Score> onNewScore(Score score) {
         // Remove score if already present,
         top.removeIf(s -> s.getName().equalsIgnoreCase(score.getName()));
         // Add the score

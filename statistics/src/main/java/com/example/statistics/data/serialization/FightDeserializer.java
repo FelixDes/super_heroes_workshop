@@ -1,4 +1,4 @@
-package com.example.statistics.serialization;
+package com.example.statistics.data.serialization;
 
 import com.example.statistics.data.Fight;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -17,7 +17,6 @@ public class FightDeserializer implements Deserializer<Fight> {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         objectMapper.registerModule(new JavaTimeModule());
     }
-
     @Override
     public Fight deserialize(String topic, byte[] data) {
         try {

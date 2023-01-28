@@ -4,6 +4,7 @@ import com.example.rest_fight.data.Fight;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
 
 public class FightSerializer implements Serializer<Fight> {
@@ -19,8 +20,7 @@ public class FightSerializer implements Serializer<Fight> {
         try {
             return objectMapper.writeValueAsBytes(data);
         } catch (JsonProcessingException e) {
-//            throw new SerializationException("Error during serialization from Fight to byte[]");
-            throw new RuntimeException(e);
+            throw new SerializationException("Error during serialization from Fight to byte[]", e);
         }
     }
 }

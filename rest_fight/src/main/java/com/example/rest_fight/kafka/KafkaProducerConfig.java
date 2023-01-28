@@ -29,15 +29,9 @@ public class KafkaProducerConfig {
     @Bean
     public ProducerFactory<String, Fight> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
-        configProps.put(
-                ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                bootstrapAddress);
-        configProps.put(
-                ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-                StringSerializer.class);
-        configProps.put(
-                ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                FightSerializer.class);
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, FightSerializer.class);
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
