@@ -1,12 +1,9 @@
 package com.example.statistics.data;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.io.PrintStream;
+import java.util.*;
 
 public class Ranking {
-
     private final int max;
 
     private final Comparator<Score> comparator = Comparator.comparingInt(s -> -1 * s.getScore());
@@ -18,16 +15,16 @@ public class Ranking {
     }
 
     public List<Score> onNewScore(Score score) {
-        // Remove score if already present,
-        top.removeIf(s -> s.getName().equalsIgnoreCase(score.getName()));
-        // Add the score
-        top.add(score);
-        // Sort
+        int i = top.indexOf(score);
+        if (i >= 0) {
+            top.get(i).incrementScore(score.getScore());
+        } else {
+            top.add(score);
+        }
         top.sort(comparator);
 
-        // Drop on overflow
         if (top.size() > max) {
-            top.remove(top.getLast());
+            top.removeLast();
         }
 
         return Collections.unmodifiableList(top);
