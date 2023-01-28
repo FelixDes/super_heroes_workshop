@@ -1,6 +1,5 @@
 package com.example.rest_fight.proxies;
 
-import com.example.rest_fight.client.Hero;
 import com.example.rest_fight.client.Villain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
