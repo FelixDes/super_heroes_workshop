@@ -1,6 +1,11 @@
 package com.example.statistics.sockets;
 
+import com.example.statistics.data.Score;
+import com.example.statistics.data.ScoreListDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -14,7 +19,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class WinnersStatsWebSocketHandler extends AbstractWebSocketHandler {
+    private final ObjectMapper mapper;
     private final List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
     @Override
@@ -27,18 +34,21 @@ public class WinnersStatsWebSocketHandler extends AbstractWebSocketHandler {
         sessions.add(session);
     }
 
-    @KafkaListener(topics = "team-stats", containerFactory = "kafkaListenerContainerFactoryDouble")
-    public void subscribe(double ratio) throws IOException {
-        this.writeForAll(ratio);
+    @KafkaListener(
+            topics = "winner-stats",
+            containerFactory = "kafkaListenerContainerFactoryScoreDTO",
+            groupId = "winner_stats_group")
+    public void subscribe(ScoreListDTO list) throws IOException {
+        this.writeForAll(mapper.writeValueAsString(list.getScores()));
     }
 
-    public void writeForAll(double ratio) throws IOException {
+    public void writeForAll(String serialized) throws IOException {
         for (WebSocketSession session : sessions) {
-            write(session, ratio);
+            write(session, serialized);
         }
     }
 
-    private void write(WebSocketSession session, Double ratio) throws IOException {
-        session.sendMessage(new TextMessage(ratio.toString()));
+    private void write(WebSocketSession session, String serialized) throws IOException {
+        session.sendMessage(new TextMessage(serialized));
     }
 }
