@@ -80,10 +80,10 @@
     $(document).ready(function () {
         var host = window.location.host;
 
-        // var top = new WebSocket("ws://" + host + "/stats/winners");
-        // top.onmessage = function (event) {
-        //     updateTop(event.data);
-        // };
+        var top = new WebSocket("ws://" + host + "/stats/winners");
+        top.onmessage = function (event) {
+            updateTop(event.data);
+        };
         var team = new WebSocket("ws://" + host + "/stats/team");
         team.onmessage = function(event) {
             console.log(event.data);
