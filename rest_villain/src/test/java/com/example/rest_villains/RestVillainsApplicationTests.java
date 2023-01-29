@@ -1,6 +1,7 @@
 package com.example.rest_villains;
 
 import com.example.rest_villains.data.Villain;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,8 @@ class RestVillainsApplicationTests {
     private static String villainId;
 
     @Autowired
+    ObjectMapper mapper;
+    @Autowired
     private MockMvc mockMvc;
 
     @Test
@@ -70,7 +73,7 @@ class RestVillainsApplicationTests {
         villain.setPicture(DEFAULT_PICTURE);
 
         this.mockMvc.perform(post("/api/villains")
-                        .content(villain.toString())
+                        .content(mapper.writeValueAsString(villain))
                         .header(CONTENT_TYPE, JSON)
                         .header(ACCEPT, JSON))
                 .andExpect(status().isBadRequest());
@@ -92,10 +95,10 @@ class RestVillainsApplicationTests {
         villain.setLevel(DEFAULT_LEVEL);
         villain.setPowers(DEFAULT_POWERS);
         villain.setPicture(DEFAULT_PICTURE);
-        var villainJson = villain.toString();
+        String valueAsString = mapper.writeValueAsString(villain);
 
         String location = this.mockMvc.perform(post("/api/villains")
-                        .content(villainJson)
+                        .content(valueAsString)
                         .header(CONTENT_TYPE, JSON)
                         .header(ACCEPT, JSON))
                 .andExpect(status().isCreated())
@@ -109,9 +112,11 @@ class RestVillainsApplicationTests {
 
         assertThat(villainId).isNotNull();
 
-        this.mockMvc.perform(get("/api/villains/{id}", villainId))
+        Villain villainFromController = mapper.readValue(this.mockMvc.perform(get("/api/villains/{id}", villainId))
                 .andExpect(status().isOk())
-                .andExpect(content().json(villainJson));
+                .andReturn().getResponse().getContentAsString(), Villain.class);
+
+        assertThat(villainFromController).isEqualTo(villain);
     }
 
     @Test
@@ -125,15 +130,14 @@ class RestVillainsApplicationTests {
         villain.setLevel(UPDATED_LEVEL);
         villain.setPowers(UPDATED_POWERS);
         villain.setPicture(UPDATED_PICTURE);
-        var villainJson = villain.toString();
 
         this.mockMvc.perform(put("/api/villains")
-                        .content(villainJson)
+                        .content(mapper.writeValueAsString(villain))
                         .header(CONTENT_TYPE, JSON)
                         .header(ACCEPT, JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(JSON))
-                .andExpect(content().json(villainJson));
+                .andExpect(content().json(mapper.writeValueAsString(villain)));
     }
 
     @Test
