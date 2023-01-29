@@ -1,6 +1,6 @@
 create table hero
 (
-    id         bigint      not null
+    id         bigserial     not null
         primary key,
     level      integer     not null
         constraint hero_level_check
