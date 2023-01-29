@@ -23,6 +23,7 @@ import reactor.core.publisher.Mono;
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 
 @Slf4j
 @Tag(name = "Heroes")
@@ -47,7 +48,6 @@ public class HeroController {
         return ResponseEntity.ok("PING OK");
     }
 
-
     @GetMapping
     @Operation(summary = "Returns all the heroes from the database")
     @ApiResponse(responseCode = "200", content = @Content(
@@ -67,21 +67,16 @@ public class HeroController {
         return service.findRandomHero().doOnNext(hero -> log.debug("Found random hero " + hero));
     }
 
-    // TODO
+
     @GetMapping("/{id}")
     @Operation(summary = "Returns a hero for a given identifier")
     @ApiResponse(responseCode = "200", content = @Content(mediaType = JSON, schema = @Schema(implementation = Hero.class)))
     @ApiResponse(responseCode = "204", description = "The Hero is not found for a given identifier")
     public Mono<ResponseEntity<Hero>> getHero(@PathVariable("id") Long id) {
-        return service.findHeroById(id).flatMap(hero -> {
-            if (Objects.nonNull(hero)) {
-                log.debug("Found Hero " + hero);
-                return Mono.just(ResponseEntity.ok(hero));
-            } else {
-                log.debug("No Hero found with id " + id);
-                return Mono.just(ResponseEntity.noContent().build());
-            }
-        });
+        return service.findHeroById(id).map(hero -> {
+            log.info("Found Hero " + hero);
+            return ResponseEntity.ok(hero);
+        }).switchIfEmpty(Mono.just(ResponseEntity.noContent().build()));
     }
 
     @PostMapping
