@@ -74,7 +74,7 @@ public class HeroController {
     @ApiResponse(responseCode = "204", description = "The Hero is not found for a given identifier")
     public Mono<ResponseEntity<Hero>> getHero(@PathVariable("id") Long id) {
         return service.findHeroById(id).map(hero -> {
-            log.info("Found Hero " + hero);
+            log.debug("Found Hero " + hero);
             return ResponseEntity.ok(hero);
         }).switchIfEmpty(Mono.just(ResponseEntity.noContent().build()));
     }
@@ -104,8 +104,8 @@ public class HeroController {
     @Operation(summary = "Deletes an exiting hero")
     @ApiResponse(responseCode = "204")
     public Mono<ResponseEntity<Hero>> deleteHero(@PathVariable("id") Long id) {
-        return service.deleteHeroById(id)
-                .doOnNext(x -> log.debug("Hero deleted with " + id))
-                .map(v -> ResponseEntity.noContent().build());
+        return service.deleteHeroById(id).thenReturn(ResponseEntity.noContent().build());
+//                .doOnNext(x -> log.info("Hero deleted with " + id))
+
     }
 }
