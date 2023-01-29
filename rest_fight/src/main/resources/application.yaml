@@ -34,3 +34,12 @@ hero_proxy_random:
 villain_proxy_random:
   url: localhost:8084
   path: /api/villains/random
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

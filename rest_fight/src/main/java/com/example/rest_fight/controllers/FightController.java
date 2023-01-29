@@ -3,6 +3,8 @@ package com.example.rest_fight.controllers;
 import com.example.rest_fight.data.Fight;
 import com.example.rest_fight.data.Fighters;
 import com.example.rest_fight.services.FightService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,13 @@ public class FightController {
 
     public FightController(FightService service) {
         this.service = service;
+    }
+
+    @GetMapping("/ping")
+    @Operation(summary = "Returns \"PING OK\" message")
+    @ApiResponse(responseCode = "200")
+    public ResponseEntity<String> ping() {
+        return ResponseEntity.ok("PING OK");
     }
 
     @GetMapping("/randomfighters")

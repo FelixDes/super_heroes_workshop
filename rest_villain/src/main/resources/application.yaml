@@ -14,3 +14,12 @@ spring:
         jdbc.lob.non_contextual_creation: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,13 @@ public class VillainController {
     }
 
     private static final String JSON = MediaType.APPLICATION_JSON_VALUE;
+
+    @GetMapping("/ping")
+    @Operation(summary = "Returns \"PING OK\" message")
+    @ApiResponse(responseCode = "200")
+    public ResponseEntity<String> ping() {
+        return ResponseEntity.ok("PING OK");
+    }
 
     @GetMapping
     @Operation(summary = "Returns all the villains from the database")

@@ -40,6 +40,14 @@ public class HeroController {
 
     private static final String JSON = MediaType.APPLICATION_JSON_VALUE;
 
+    @GetMapping("/ping")
+    @Operation(summary = "Returns \"PING OK\" message")
+    @ApiResponse(responseCode = "200")
+    public ResponseEntity<String> ping() {
+        return ResponseEntity.ok("PING OK");
+    }
+
+
     @GetMapping
     @Operation(summary = "Returns all the heroes from the database")
     @ApiResponse(responseCode = "200", content = @Content(

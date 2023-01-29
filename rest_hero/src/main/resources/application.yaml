@@ -5,3 +5,12 @@ spring:
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/heroes_db
     username: felix
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
