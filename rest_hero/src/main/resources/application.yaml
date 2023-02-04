@@ -6,6 +6,13 @@ spring:
     url: r2dbc:postgresql://localhost:5432/heroes_db
     username: felix
 
+  flyway:
+    url: jdbc:postgresql://localhost:5432/heroes_db
+    schemas: public
+    user: felix
+    password:
+
+
 management:
   endpoints:
     web:
