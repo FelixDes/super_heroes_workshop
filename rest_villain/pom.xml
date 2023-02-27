@@ -3,18 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.project.parent</groupId>
+        <artifactId>spring_microservices_super_heroes</artifactId>
+        <version>2.0.0</version>
     </parent>
-    <groupId>com.example</groupId>
+    <groupId>com.project.services</groupId>
     <artifactId>rest_villain</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <name>rest_villain</name>
     <description>rest_villain</description>
     <properties>
-        <java.version>19</java.version>
+        <java.version>18</java.version>
     </properties>
     <dependencies>
         <dependency>
