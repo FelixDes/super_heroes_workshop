@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper
@@ -11,7 +11,7 @@ services:
     image: confluentinc/cp-kafka
     container_name: kafka
     ports:
-      - "8086:9092"
+      - "8186:9092"
     depends_on:
       - zookeeper
     environment:
