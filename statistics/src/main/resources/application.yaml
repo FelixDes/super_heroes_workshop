@@ -1,9 +1,9 @@
 server:
-  port: 8085
+  port: 8185
 
 spring:
   kafka:
-    bootstrap-servers: localhost:8086
+    bootstrap-servers: localhost:8186
     consumer:
       auto-offset-reset: earliest
 

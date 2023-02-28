@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8182
 
 spring:
   datasource:
@@ -24,15 +24,15 @@ spring:
 
   kafka:
     bootstrap-servers:
-      localhost:8086
+      localhost:8186
     template:
       default-topic: fights
 
 hero_proxy_random:
-  url: localhost:8083
+  url: localhost:8183
   path: /api/heroes/random
 villain_proxy_random:
-  url: localhost:8084
+  url: localhost:8184
   path: /api/villains/random
 
 management:

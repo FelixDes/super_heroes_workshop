@@ -4,13 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
     <groupId>com.project.parent</groupId>
     <artifactId>spring_microservices_super_heroes</artifactId>
     <version>${revision}</version>
@@ -20,7 +13,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <revision>2.0.0</revision>
         <java.version>19</java.version>
     </properties>
 
