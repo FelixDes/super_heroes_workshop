@@ -29,4 +29,6 @@ COPY --from=app-build $BUILD_PATH/spring-boot-loader/ ./
 COPY --from=app-build $BUILD_PATH/dependencies/ ./
 COPY --from=app-build $BUILD_PATH/application/ ./
 
+ENV SPRING_PROFILES_ACTIVE=prod
+
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]

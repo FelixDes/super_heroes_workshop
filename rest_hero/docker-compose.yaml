@@ -1,17 +1,16 @@
+version: '3.9'
 services:
-  service:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    network_mode: "host"
+  hero-service:
+    build: .
     ports:
       - "8183:8183"
     depends_on:
       - db
   db:
     image: postgres:alpine
-    network_mode: "host"
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     volumes:
       - ./postgres_container/init.sql:/docker-entrypoint-initdb.d/init.sql
