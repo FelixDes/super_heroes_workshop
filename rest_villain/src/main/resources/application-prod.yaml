@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db-villain:5432/villains_db
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: create
