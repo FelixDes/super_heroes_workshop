@@ -15,16 +15,14 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
 
-
   cloud:
     openfeign:
       circuitbreaker:
         enabled: true
 
-
   kafka:
     bootstrap-servers:
-      localhost:8186
+      0.0.0.0:8186
     template:
       default-topic: fights
 

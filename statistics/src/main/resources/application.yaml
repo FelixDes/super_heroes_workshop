@@ -3,8 +3,10 @@ server:
 
 spring:
   kafka:
-    bootstrap-servers: localhost:8186
+    bootstrap-servers: 0.0.0.0:8186
     consumer:
+      bootstrap-servers:
+        localhost:8186
       auto-offset-reset: earliest
 
 topics:
