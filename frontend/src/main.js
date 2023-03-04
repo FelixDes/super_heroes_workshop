@@ -12,9 +12,14 @@ import {createApp} from 'vue'
 
 // Plugins
 import {registerPlugins} from '@/plugins'
+// import KeyCloakService from "@/plugins/KeycloakService";
 
 const app = createApp(App)
 
 registerPlugins(app)
 
-app.mount('#app')
+const renderApp = () => {
+  app.mount("#app");
+};
+renderApp()
+// KeyCloakService.callLogin(renderApp);
