@@ -1,11 +1,11 @@
 spring:
   r2dbc:
-    url: r2dbc:postgresql://db:5432/heroes_db
+    url: r2dbc:postgresql://db-hero:5432/heroes_db
     username: postgres
     password: postgres
 
   flyway:
-    url: jdbc:postgresql://db:5432/heroes_db
+    url: jdbc:postgresql://db-hero:5432/heroes_db
     schemas: public
     user: postgres
     password: postgres
