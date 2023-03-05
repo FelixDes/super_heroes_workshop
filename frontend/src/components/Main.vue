@@ -22,6 +22,8 @@
         :entity="fighters?.villain"
       ></entity-panel>
     </v-container>
+
+    <v-btn @click="KeycloakService.logout()" class="logout-btn">Logout</v-btn>
   </div>
 </template>
 
@@ -32,9 +34,15 @@ import FightControlPanel from "@/components/FightControlPanel.vue";
 import Stats from "@/components/BattleLog.vue";
 import axios from "axios";
 import URL_CONSTANTS from "@/URL_CONSTANTS";
+import KeycloakService from "@/plugins/KeycloakService";
 
 export default {
   name: "Main",
+  computed: {
+    KeycloakService() {
+      return KeycloakService
+    }
+  },
   components: {Stats, FightControlPanel, EntityPanel, HeroPanel},
   data() {
     return {
@@ -73,7 +81,7 @@ export default {
 
 <style scoped>
 .content {
-  margin: 0 5%;
+  padding: 0 5%;
 }
 
 .header {
@@ -94,6 +102,14 @@ export default {
 
 .entity_panel {
   flex-basis: 30%;
+}
+
+.logout-btn {
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  right: 30px;
+  bottom: 40px;
 }
 
 @media screen and (max-width: 790px) {

@@ -15,12 +15,6 @@ export default {
   name: "App",
   components: {Main},
   created() {
-    window.addEventListener("keydown", (event) => {
-      if (event.isComposing || (event.key === 'Backspace')) {
-        KeyCloakService.logout()
-      }
-    })
-
     axios.interceptors.request.use(async config => {
       const token = await KeyCloakService.updateToken()
 
@@ -28,7 +22,7 @@ export default {
       return config
     })
 
-    axios.interceptors.response.use( (response) => {
+    axios.interceptors.response.use((response) => {
       return response
     }, error => {
       return new Promise((resolve, reject) => {
