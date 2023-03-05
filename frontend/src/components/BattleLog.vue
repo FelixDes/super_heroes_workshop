@@ -50,7 +50,6 @@ export default {
       axios.get(URL_CONSTANTS.FIGHT_MICROSERVICE_GET_BATTLES_LOG).then(resp => {
         let d = resp.data
         this.items = d.splice(d.length - 20).reverse()
-        console.log(this.items)
       }).catch(e => console.log(e))
     }
   }

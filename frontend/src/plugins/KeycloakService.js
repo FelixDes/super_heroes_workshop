@@ -17,17 +17,18 @@ const login = (onAuthenticatedCallback) => {
     });
 };
 
-const updateToken = () => {
-  keycloakInstance.updateToken(70)
+const updateToken = async () => {
+  await keycloakInstance.updateToken(70)
+  return keycloakInstance.token
 }
 
-const getToken = () => {
-  return keycloakInstance.token
+const logout = () => {
+  return keycloakInstance.logout()
 }
 
 const KeyCloakService = {
   callLogin: login,
   updateToken: updateToken,
-  getToken: getToken,
+  logout: logout,
 };
 export default KeyCloakService;
