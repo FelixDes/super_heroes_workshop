@@ -13,7 +13,7 @@
       width="1000"
     >
       <template v-slot:activator>
-        <v-btn class="btn" @click="statsDialog = !statsDialog">
+        <v-btn :disabled="!KeycloakService.checkRole('APP_ADMIN')" class="btn" @click="statsDialog = !statsDialog">
           <v-icon>mdi-view-list</v-icon>
           <span>Statistics</span>
         </v-btn>
@@ -41,9 +41,15 @@
 
 <script>
 import Stats from "@/components/BattleLog.vue";
+import KeycloakService from "@/plugins/KeycloakService";
 
 export default {
   name: "FightControlPanel",
+  computed: {
+    KeycloakService() {
+      return KeycloakService
+    }
+  },
   components: {Stats},
   data() {
     return {

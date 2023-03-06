@@ -26,9 +26,14 @@ const logout = () => {
   return keycloakInstance.logout()
 }
 
+const checkRole = (role) => {
+  return keycloakInstance.hasRealmRole(role)
+}
+
 const KeyCloakService = {
   callLogin: login,
   updateToken: updateToken,
   logout: logout,
+  checkRole: checkRole,
 };
 export default KeyCloakService;
