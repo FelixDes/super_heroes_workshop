@@ -26,6 +26,18 @@ spring:
     template:
       default-topic: fights
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri:  http://localhost:8888/realms/super_realm
+#    resourceserver:
+#      jwt:
+#
+#        issuer-uri :
+#
+#        key-uri: http://localhost:8888/auth/realms/super_realm/protocol/openid-connect/certs
+
 hero_proxy_random:
   url: localhost:8183
   path: /api/heroes/random

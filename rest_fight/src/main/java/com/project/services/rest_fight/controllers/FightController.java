@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +33,7 @@ public class FightController {
     }
 
     @GetMapping("/randomfighters")
-    public ResponseEntity<Fighters> getRandomFighters() {
+    public ResponseEntity<Fighters> getRandomFighters(@AuthenticationPrincipal Jwt principal) {
         Fighters fighters = service.findRandomFighters();
         log.debug("Get random fighters " + fighters);
         return ResponseEntity.ok(fighters);
