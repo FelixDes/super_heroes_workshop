@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db-fight:5432/fights_db
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:8080/realms/super_realm
+
+hero_proxy_random:
+  url: hero-service:8183
+  path: /api/heroes/random
+villain_proxy_random:
+  url: villain-service:8184
+  path: /api/villains/random

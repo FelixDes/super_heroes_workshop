@@ -6,11 +6,23 @@ services:
       - "8184:8184"
     depends_on:
       - db-villain
+    networks:
+      - backend
+      - villain-internal
   db-villain:
     image: postgres:alpine
+    networks:
+      - villain-internal
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     volumes:
       - ./db_container/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  backend:
+    external: true
+
+  villain-internal:
+    driver: bridge

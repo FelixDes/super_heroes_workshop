@@ -1,18 +1,21 @@
 version: '3.9'
 services:
-  hero-service:
+  fight-service:
     build: .
     ports:
-      - "8183:8183"
+      - "8182:8182"
     depends_on:
-      - db-hero
+      - db-fight
     networks:
+      - keycloak
       - backend
-      - hero-internal
-  db-hero:
+      - frontend
+      - kafka
+      - fight-internal
+  db-fight:
     image: postgres:alpine
     networks:
-      - hero-internal
+      - fight-internal
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -21,8 +24,14 @@ services:
       - ./db_container/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 networks:
+  kafka:
+    external: true
   backend:
     external: true
+  keycloak:
+    external: true
+  frontend:
+    external: true
 
-  hero-internal:
+  fight-internal:
     driver: bridge

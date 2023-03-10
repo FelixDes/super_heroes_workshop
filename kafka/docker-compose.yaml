@@ -3,6 +3,8 @@ services:
   zookeeper:
     image: confluentinc/cp-zookeeper
     container_name: zookeeper
+    networks:
+      - kafka-internal
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -14,6 +16,9 @@ services:
       - "8186:9092"
     depends_on:
       - zookeeper
+    networks:
+      - kafka
+      - kafka-internal
     environment:
       KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka:19092,LISTENER_DOCKER_EXTERNAL://localhost:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
@@ -22,3 +27,10 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+networks:
+  kafka:
+    external: true
+
+  kafka-internal:
+    driver: bridge

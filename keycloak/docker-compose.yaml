@@ -17,6 +17,8 @@ services:
       timeout: 5s
       retries: 3
       start_period: 5s
+    networks:
+      - keycloak-internal
     deploy:
       resources:
         limits:
@@ -35,8 +37,13 @@ services:
       KC_FEATURES: preview
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+    expose:
+      - "8080"
     ports:
       - "8888:8080"
+    networks:
+      - keycloak
+      - keycloak-internal
     depends_on:
       keycloak-postgres:
         condition: service_healthy
@@ -51,3 +58,10 @@ services:
 #        source: ./realm-export.json
 #        target: /opt/keycloak/data/import/realm-export.json
 #        read_only: true
+
+networks:
+  keycloak:
+    external: true
+
+  keycloak-internal:
+    driver: bridge

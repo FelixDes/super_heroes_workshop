@@ -1,0 +1,1 @@
+create database fights_db;
