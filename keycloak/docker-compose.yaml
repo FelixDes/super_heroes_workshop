@@ -9,8 +9,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+    #    volumes:
+    #      - ./postgres-data:/var/lib/postgresql/data
     healthcheck:
       test: pg_isready -d postgres
       interval: 10s
@@ -37,6 +37,11 @@ services:
       KC_FEATURES: preview
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+    volumes:
+      - type: bind
+        source: ./imports/realm-export.json
+        target: /opt/keycloak/data/import/realm-export.json
+        read_only: true
     expose:
       - "8080"
     ports:
@@ -48,7 +53,7 @@ services:
       keycloak-postgres:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://0.0.0.0:8080/realms/master"]
+      test: [ "CMD", "curl", "-f", "http://0.0.0.0:8080/realms/master" ]
       start_period: 10s
       interval: 30s
       retries: 3

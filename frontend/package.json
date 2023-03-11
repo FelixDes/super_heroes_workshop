@@ -9,7 +9,7 @@
   "dependencies": {
     "@mdi/font": "7.0.96",
     "axios": "^1.2.2",
-    "keycloak-js": "^21.0.0",
+    "keycloak-js": "^21.0.2",
     "roboto-fontface": "*",
     "vue": "^3.2.38",
     "vuetify": "^3.0.0",

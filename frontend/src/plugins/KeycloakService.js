@@ -1,5 +1,7 @@
 import Keycloak from "keycloak-js";
-const keycloakInstance = new Keycloak();
+import KEYCLOAK_CONFIG from "@/const/KEYCLOAK_CONFIG";
+
+const keycloakInstance = new Keycloak(KEYCLOAK_CONFIG.CONFIG);
 /**
  * Initializes Keycloak instance and calls the provided callback function if successfully authenticated.
  *
@@ -7,7 +9,7 @@ const keycloakInstance = new Keycloak();
  */
 const login = (onAuthenticatedCallback) => {
   keycloakInstance
-    .init({ onLoad: "login-required" })
+    .init({onLoad: "login-required"})
     .then(function (authenticated) {
       authenticated ? onAuthenticatedCallback() : alert("non authenticated");
     })

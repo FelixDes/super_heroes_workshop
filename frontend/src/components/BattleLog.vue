@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import URL_CONSTANTS from "@/URL_CONSTANTS";
+import URL_CONSTANTS from "@/const/URL_CONSTANTS";
 import axios from "axios";
 
 export default {

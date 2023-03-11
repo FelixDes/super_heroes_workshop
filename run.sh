@@ -17,13 +17,13 @@ docker-compose down --remove-orphans
 docker-compose up --build -d
 cd ../
 
-#cd ./rest_fight
-#docker-compose rm -f
-#docker-compose pull
-#docker-compose down --remove-orphans
-#mvn clean install -Dmaven.test.skip
-#docker-compose up --build -d
-#cd ../
+cd ./rest_fight
+docker-compose rm -f
+docker-compose pull
+docker-compose down --remove-orphans
+mvn clean install -Dmaven.test.skip
+docker-compose up --build -d
+cd ../
 
 cd ./rest_villain
 docker-compose rm -f
