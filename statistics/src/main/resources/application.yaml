@@ -9,6 +9,29 @@ spring:
         localhost:8186
       auto-offset-reset: earliest
 
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id:
+              statistics
+            authorization-grant-type:
+              authorization_code
+            scope:
+              openid
+
+        provider:
+          keycloak:
+            issuer-uri:
+              http://localhost:8888/realms/super_realm
+            user-name-attribute:
+              preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri:
+            http://localhost:8888/realms/super_realm
+
 topics:
   winner_stats: winner_stats
   team_stats: team_stats
