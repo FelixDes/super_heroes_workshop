@@ -33,7 +33,7 @@ import EntityPanel from "@/components/EntityPanel.vue";
 import FightControlPanel from "@/components/FightControlPanel.vue";
 import Stats from "@/components/BattleLog.vue";
 import axios from "axios";
-import URL_CONSTANTS from "@/URL_CONSTANTS";
+import URL_CONSTANTS from "@/const/URL_CONSTANTS";
 import KeycloakService from "@/plugins/KeycloakService";
 
 export default {
